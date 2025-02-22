@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Manga & Anime Explorer</title>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.20/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cyber: ['"Chakra Petch"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * {
+      font-family: 'Chakra Petch', cursive;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    const works = [
+      {
+        "title": "Gunnm",
+        "type": "Manga",
+        "author": "Yukito Kishiro",
+        "genres": ["Cyberpunk", "Action", "Science-fiction"],
+        "series": ["Original", "Last Order", "Mars Chronicle"]
+      },
+      {
+        "title": "Berserk",
+        "type": "Manga",
+        "author": "Kentaro Miura",
+        "genres": ["Dark Fantasy", "Action", "Horror"]
+      },
+      {
+        "title": "20th Century Boys",
+        "type": "Manga",
+        "author": "Naoki Urasawa",
+        "genres": ["Mystery", "Science-fiction", "Thriller"]
+      },
+      {
+        "title": "Monster",
+        "type": "Manga",
+        "author": "Naoki Urasawa",
+        "genres": ["Thriller", "Mystery", "Psychological"]
+      },
+      {
+        "title": "Blame!",
+        "type": "Manga",
+        "author": "Tsutomu Nihei",
+        "genres": ["Cyberpunk", "Science-fiction", "Horror"],
+        "series": ["Blame!", "NOiSE"]
+      },
+      {
+        "title": "Chainsaw Man",
+        "type": "Manga",
+        "author": "Tatsuki Fujimoto",
+        "genres": ["Action", "Horror", "Dark Fantasy"]
+      },
+      {
+        "title": "Dandadan",
+        "type": "Manga",
+        "author": "Yukinobu Tatsu",
+        "genres": ["Action", "Supernatural", "Comedy"]
+      },
+      {
+        "title": "Dorohedoro",
+        "type": "Manga",
+        "author": "Q Hayashida",
+        "genres": ["Dark Fantasy", "Horror", "Comedy"]
+      },
+      {
+        "title": "Biomega",
+        "type": "Manga",
+        "author": "Tsutomu Nihei",
+        "genres": ["Science-fiction", "Horror", "Action"]
+      },
+      {
+        "title": "Abara",
+        "type": "Manga",
+        "author": "Tsutomu Nihei",
+        "genres": ["Science-fiction", "Horror", "Action"]
+      },
+      {
+        "title": "Eden: It's an Endless World!",
+        "type": "Manga",
+        "author": "Hiroki Endo",
+        "genres": ["Science-fiction", "Psychological", "Action"]
+      },
+      {
+        "title": "Fire Punch",
+        "type": "Manga",
+        "author": "Tatsuki Fujimoto",
+        "genres": ["Dark Fantasy", "Horror", "Psychological"]
+      },
+      {
+        "title": "Parasyte",
+        "type": "Manga",
+        "author": "Hitoshi Iwaaki",
+        "genres": ["Horror", "Science-fiction", "Psychological"]
+      },
+      {
+        "title": "MPD Psycho",
+        "type": "Manga",
+        "author": "Eiji Otsuka",
+        "genres": ["Psychological", "Horror", "Mystery"]
+      },
+      {
+        "title": "Gantz",
+        "type": "Manga",
+        "author": "Hiroya Oku",
+        "genres": ["Science-fiction", "Horror", "Action"]
+      },
+      {
+        "title": "Hellsing",
+        "type": "Manga",
+        "author": "Kouta Hirano",
+        "genres": ["Horror", "Action", "Supernatural"]
+      },
+      {
+        "title": "Pluto",
+        "type": "Manga",
+        "author": "Naoki Urasawa",
+        "genres": ["Science-fiction", "Mystery", "Psychological"]
+      },
+      {
+        "title": "Master Keaton",
+        "type": "Manga",
+        "author": "Naoki Urasawa",
+        "genres": ["Mystery", "Adventure", "Slice of Life"]
+      },
+      {
+        "title": "Akira",
+        "type": "Anime",
+        "author": "Katsuhiro Otomo",
+        "genres": ["Cyberpunk", "Science-fiction", "Psychological"]
+      },
+      {
+        "title": "Cyber City Oedo 808",
+        "type": "Anime",
+        "author": "Yoshiaki Kawajiri",
+        "genres": ["Cyberpunk", "Action", "Science-fiction"]
+      },
+      {
+        "title": "Demon City Shinjuku",
+        "type": "Anime",
+        "author": "Yoshiaki Kawajiri",
+        "genres": ["Horror", "Supernatural", "Action"]
+      },
+      {
+        "title": "Wicked City",
+        "type": "Anime",
+        "author": "Yoshiaki Kawajiri",
+        "genres": ["Horror", "Supernatural", "Action"]
+      },
+      {
+        "title": "Ninja Scroll",
+        "type": "Anime",
+        "author": "Yoshiaki Kawajiri",
+        "genres": ["Supernatural", "Action", "Horror"]
+      },
+      {
+        "title": "Genocyber",
+        "type": "Anime",
+        "author": "Tony Takezaki",
+        "genres": ["Cyberpunk", "Horror", "Science-fiction"]
+      },
+      {
+        "title": "Bubblegum Crisis",
+        "type": "Anime",
+        "author": "Katsuhito Akiyama",
+        "genres": ["Cyberpunk", "Action", "Science-fiction"]
+      },
+      {
+        "title": "A.D. Police",
+        "type": "Anime",
+        "author": "Multiple",
+        "genres": ["Cyberpunk", "Police", "Science-fiction"]
+      },
+      {
+        "title": "Jin-Roh",
+        "type": "Anime",
+        "author": "Mamoru Oshii",
+        "genres": ["Political", "Drama", "Alternative History"]
+      },
+      {
+        "title": "Venus Wars",
+        "type": "Anime",
+        "author": "Yoshikazu Yasuhiko",
+        "genres": ["Science-fiction", "Action", "War"]
+      },
+      {
+        "title": "Black Magic M-66",
+        "type": "Anime",
+        "author": "Masamune Shirow",
+        "genres": ["Science-fiction", "Action", "Cyberpunk"]
+      },
+      {
+        "title": "Angel's Egg",
+        "type": "Anime",
+        "author": "Mamoru Oshii",
+        "genres": ["Fantasy", "Psychological", "Avant-garde"]
+      },
+      {
+        "title": "Download",
+        "type": "Anime",
+        "author": "Multiple",
+        "genres": ["Cyberpunk", "Science-fiction", "Action"]
+      },
+      {
+        "title": "Roujin Z",
+        "type": "Anime",
+        "author": "Katsuhiro Otomo",
+        "genres": ["Science-fiction", "Satire", "Comedy"]
+      },
+      {
+        "title": "Armitage III",
+        "type": "Anime",
+        "author": "Hiroyuki Ochi",
+        "genres": ["Cyberpunk", "Science-fiction", "Police"]
+      },
+      {
+        "title": "Goku Midnight Eye",
+        "type": "Anime",
+        "author": "Yoshiaki Kawajiri",
+        "genres": ["Cyberpunk", "Action", "Detective"]
+      },
+      {
+        "title": "Perfect Blue",
+        "type": "Anime",
+        "author": "Satoshi Kon",
+        "genres": ["Psychological", "Thriller", "Horror"]
+      },
+      {
+        "title": "Memories",
+        "type": "Anime",
+        "author": "Multiple",
+        "genres": ["Science-fiction", "Psychological", "Anthology"],
+        "series": ["Magnetic Rose", "Stink Bomb", "Cannon Fodder"]
+      },
+      {
+        "title": "Texhnolyze",
+        "type": "Anime",
+        "author": "Yoshitoshi ABe",
+        "genres": ["Cyberpunk", "Psychological", "Science-fiction"]
+      },
+      {
+        "title": "Serial Experiments Lain",
+        "type": "Anime",
+        "author": "Yoshitoshi ABe",
+        "genres": ["Cyberpunk", "Psychological", "Science-fiction"]
+      },
+      {
+        "title": "Jigokuraku (Hell's Paradise)",
+        "type": "Manga",
+        "author": "Yuji Kaku",
+        "genres": ["Dark Fantasy", "Horror", "Action"],
+        "year": 2018
+      },
+      {
+        "title": "Jagaaaaan",
+        "type": "Manga",
+        "author": "Muneyuki Kaneshiro",
+        "genres": ["Psychological", "Body Horror", "Action"],
+        "year": 2017
+      },
+      {
+        "title": "Made in Abyss",
+        "type": "Manga",
+        "author": "Akihito Tsukushi",
+        "genres": ["Dark Fantasy", "Science-fiction", "Adventure"],
+        "year": 2012
+      },
+      {
+        "title": "Dead Dead Demon's Dededede Destruction",
+        "type": "Manga",
+        "author": "Inio Asano",
+        "genres": ["Science-fiction", "Psychological", "Slice of Life"],
+        "year": 2014
+      },
+      {
+        "title": "Houseki no Kuni (Land of the Lustrous)",
+        "type": "Manga",
+        "author": "Haruko Ichikawa",
+        "genres": ["Science-fiction", "Psychological", "Post-apocalyptic"],
+        "year": 2012
+      },
+      {
+        "title": "Kaiju No. 8",
+        "type": "Manga",
+        "author": "Naoya Matsumoto",
+        "genres": ["Action", "Science-fiction", "Horror"],
+        "year": 2020
+      },
+      {
+        "title": "Dai Dark",
+        "type": "Manga",
+        "author": "Q Hayashida",
+        "genres": ["Dark Fantasy", "Science-fiction", "Horror"],
+        "year": 2019
+      },
+      {
+        "title": "The Boy's Abyss",
+        "type": "Manga",
+        "author": "Ryo Minenami",
+        "genres": ["Psychological", "Drama", "Dark"],
+        "year": 2020
+      },
+      {
+        "title": "Happiness",
+        "type": "Manga",
+        "author": "Shuzo Oshimi",
+        "genres": ["Psychological", "Horror", "Supernatural"],
+        "year": 2015
+      },
+      {
+        "title": "Cyberpunk: Edgerunners",
+        "type": "Anime",
+        "author": "Studio Trigger",
+        "genres": ["Cyberpunk", "Action", "Psychological"],
+        "year": 2022
+      },
+      {
+        "title": "Id:Invaded",
+        "type": "Anime",
+        "author": "Ei Aoki",
+        "genres": ["Science-fiction", "Psychological", "Detective"],
+        "year": 2020
+      },
+      {
+        "title": "Dorohedoro",
+        "type": "Anime",
+        "author": "MAPPA",
+        "genres": ["Dark Fantasy", "Horror", "Comedy"],
+        "year": 2020
+      },
+      {
+        "title": "No Guns Life",
+        "type": "Manga",
+        "author": "Tasuku Karasuma",
+        "genres": ["Cyberpunk", "Action", "Neo-noir"],
+        "year": 2014
+      },
+      {
+        "title": "Hell's Paradise",
+        "type": "Anime",
+        "author": "MAPPA",
+        "genres": ["Dark Fantasy", "Horror", "Action"],
+        "year": 2023
+      },
+      {
+        "title": "Oshi no Ko",
+        "type": "Manga",
+        "author": "Aka Akasaka",
+        "genres": ["Psychological", "Drama", "Supernatural"],
+        "year": 2020
+      }
+    ];
+
+    const WorkExplorer = () => {
+      const [selectedTypes, setSelectedTypes] = React.useState([]);
+      const [selectedGenres, setSelectedGenres] = React.useState([]);
+      const [selectedAuthors, setSelectedAuthors] = React.useState([]);
+      const [searchTerm, setSearchTerm] = React.useState("");
+
+      const types = React.useMemo(() => [...new Set(works.map(work => work.type))], []);
+      const genres = React.useMemo(() => [...new Set(works.flatMap(work => work.genres))].sort(), []);
+      const authors = React.useMemo(() => [...new Set(works.map(work => work.author))].sort(), []);
+
+      const filteredWorks = React.useMemo(() => {
+        return works.filter(work => {
+          const matchesType = selectedTypes.length === 0 || selectedTypes.includes(work.type);
+          const matchesGenre = selectedGenres.length === 0 || work.genres.some(g => selectedGenres.includes(g));
+          const matchesAuthor = selectedAuthors.length === 0 || selectedAuthors.includes(work.author);
+          const matchesSearch = searchTerm === "" ||
+            work.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            work.author.toLowerCase().includes(searchTerm.toLowerCase());
+
+          return matchesType && matchesGenre && matchesAuthor && matchesSearch;
+        });
+      }, [selectedTypes, selectedGenres, selectedAuthors, searchTerm]);
+
+      const FilterButton = ({ label, isSelected, onClick }) => (
+        <button
+          onClick={onClick}
+          className={`px-4 py-2 m-1 rounded-full text-base transition-colors ${isSelected
+            ? 'bg-purple-600 text-white'
+            : 'bg-purple-100 text-purple-800 hover:bg-purple-200'
+            }`}
+        >
+          {label}
+        </button>
+      );
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-purple-900 to-black text-white p-8">
+          <div className="px-8 md:px-16 lg:px-24">
+            <h1 className="text-5xl mb-12 text-center font-cyber font-bold leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              Manga & Anime Explorer
+            </h1>
+
+            <div className="mb-12">
+              <input
+                type="text"
+                placeholder="Rechercher par titre ou auteur..."
+                className="w-full p-4 rounded-lg bg-purple-900/50 border border-purple-500 text-white placeholder-purple-300 text-lg"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-8 space-y-6">
+              <div className="flex items-center gap-2 mb-6">
+                <h2 className="text-2xl font-cyber pb-4">Filtres</h2>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-purple-300 font-cyber text-xl pb-3">Types</h3>
+                <div className="flex flex-wrap gap-2">
+                  {types.map(type => (
+                    <FilterButton
+                      key={type}
+                      label={type}
+                      isSelected={selectedTypes.includes(type)}
+                      onClick={() => setSelectedTypes(prev =>
+                        prev.includes(type)
+                          ? prev.filter(t => t !== type)
+                          : [...prev, type]
+                      )}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-purple-300 font-cyber text-xl pb-3">Genres</h3>
+                <div className="flex flex-wrap gap-2">
+                  {genres.map(genre => (
+                    <FilterButton
+                      key={genre}
+                      label={genre}
+                      isSelected={selectedGenres.includes(genre)}
+                      onClick={() => setSelectedGenres(prev =>
+                        prev.includes(genre)
+                          ? prev.filter(g => g !== genre)
+                          : [...prev, genre]
+                      )}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-purple-300 font-cyber text-xl pb-3">Auteurs</h3>
+                <div className="flex flex-wrap gap-2">
+                  {authors.map(author => (
+                    <FilterButton
+                      key={author}
+                      label={author}
+                      isSelected={selectedAuthors.includes(author)}
+                      onClick={() => setSelectedAuthors(prev =>
+                        prev.includes(author)
+                          ? prev.filter(a => a !== author)
+                          : [...prev, author]
+                      )}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredWorks.map(work => (
+                <div
+                  key={work.title}
+                  className="bg-purple-900/30 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-colors"
+                >
+                  <h3 className="text-2xl font-cyber font-bold mb-4">{work.title}</h3>
+                  <p className="text-purple-300 mb-4 text-lg">{work.author}</p>
+                  <div className="flex flex-wrap gap-3">
+                    <span className="px-3 py-2 bg-purple-800/50 rounded text-base">{work.type}</span>
+                    {work.genres.map(genre => (
+                      <span
+                        key={genre}
+                        className="px-3 py-2 bg-purple-700/30 rounded text-base"
+                      >
+                        {genre}
+                      </span>
+                    ))}
+                  </div>
+                  {work.series && (
+                    <div className="mt-4 text-base text-purple-300">
+                      Séries: {work.series.join(", ")}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<WorkExplorer />);
+  </script>
+</body>
+
+</html>
