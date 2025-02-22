@@ -557,7 +557,6 @@
         "year": 2020,
         "note": "Adaptation fidèle avec une belle direction artistique"
       },
-
       {
         "title": "Princess Mononoke",
         "director": "Hayao Miyazaki",
@@ -788,7 +787,7 @@
               <div className="space-y-4">
                 <h3 className="text-purple-300 font-cyber text-xl pb-3">Types</h3>
                 <div className="flex flex-wrap gap-2">
-                  {types.map(type => (
+                  {types && types.map(type => (
                     <FilterButton
                       key={type}
                       label={type}
@@ -806,7 +805,7 @@
               <div className="space-y-4">
                 <h3 className="text-purple-300 font-cyber text-xl pb-3">Genres</h3>
                 <div className="flex flex-wrap gap-2">
-                  {genres.map(genre => (
+                  {genres && genres.map(genre => (
                     <FilterButton
                       key={genre}
                       label={genre}
@@ -824,7 +823,7 @@
               <div className="space-y-4">
                 <h3 className="text-purple-300 font-cyber text-xl pb-3">Auteurs</h3>
                 <div className="flex flex-wrap gap-2">
-                  {authors.map(author => (
+                  {authors && authors.map(author => (
                     <FilterButton
                       key={author}
                       label={author}
@@ -841,7 +840,7 @@
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredWorks.map(work => (
+              {filteredWorks && filteredWorks.map(work => (
                 <div
                   key={work.title}
                   className="bg-purple-900/30 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-colors"
@@ -850,7 +849,7 @@
                   <p className="text-purple-300 mb-4 text-lg">{work.author}</p>
                   <div className="flex flex-wrap gap-3">
                     <span className="px-3 py-2 bg-purple-800/50 rounded text-base">{work.type}</span>
-                    {work.genres.map(genre => (
+                    {work.genres && work.genres.map(genre => (
                       <span
                         key={genre}
                         className="px-3 py-2 bg-purple-700/30 rounded text-base"
