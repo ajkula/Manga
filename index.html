@@ -3103,8 +3103,8 @@
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="min-w-96">
-                {filteredWorks && filteredWorks.map(work => (
+              {filteredWorks && filteredWorks.map(work => (
+                <div className="min-w-96">
                   <div
                     key={work.title}
                     className="bg-purple-900/30 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-colors"
@@ -3135,8 +3135,8 @@
                       </div>
                     )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
