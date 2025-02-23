@@ -3102,39 +3102,37 @@
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1920px] mx-auto">
               {filteredWorks && filteredWorks.map(work => (
-                <div className="min-w-96">
-                  <div
-                    key={work.title}
-                    className="bg-purple-900/30 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-colors"
-                  >
-                    <h3 className="text-2xl font-cyber font-bold mb-4 ">{work.title}</h3>
-                    <p className="text-purple-300 mb-4 text-lg">
-                      {`${work.author}${work.year ? ` ${work.year}` : ''}`}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      <span className="px-3 py-2 bg-purple-800/50 rounded text-base">{work.type}</span>
-                      {work.genres && work.genres.map(genre => (
-                        <span
-                          key={genre}
-                          className="px-3 py-2 bg-purple-700/30 rounded text-base"
-                        >
-                          {genre}
-                        </span>
-                      ))}
-                    </div>
-                    {work.series && (
-                      <div className="mt-4 text-base text-purple-300">
-                        Séries: {work.series.join(", ")}
-                      </div>
-                    )}
-                    {work.note && (
-                      <div className="mt-4 text-base text-white-300">
-                        Note: {work.note}
-                      </div>
-                    )}
+                <div
+                  key={work.title}
+                  className="bg-purple-900/30 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-colors w-full"
+                >
+                  <h3 className="text-2xl font-cyber font-bold mb-4 ">{work.title}</h3>
+                  <p className="text-purple-300 mb-4 text-lg">
+                    {`${work.author}${work.year ? ` ${work.year}` : ''}`}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <span className="px-3 py-2 bg-purple-800/50 rounded text-base">{work.type}</span>
+                    {work.genres && work.genres.map(genre => (
+                      <span
+                        key={genre}
+                        className="px-3 py-2 bg-purple-700/30 rounded text-base"
+                      >
+                        {genre}
+                      </span>
+                    ))}
                   </div>
+                  {work.series && (
+                    <div className="mt-4 text-base text-purple-300">
+                      Séries: {work.series.join(", ")}
+                    </div>
+                  )}
+                  {work.note && (
+                    <div className="mt-4 text-base text-white-300">
+                      Note: {work.note}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
